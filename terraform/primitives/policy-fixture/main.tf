@@ -76,7 +76,7 @@ resource "google_storage_bucket" "bad_no_labels" {
   encryption { default_kms_key_name = google_kms_crypto_key.key.id }
   labels = {
     project = "lab33", environment = "dev"
-    managed_by = "terraform", compliance_scope = "cge-p-lab"
+    managed_by = "terraform", compliance_scope = "cge-p-lab"  # there were no labels initially
   }
 }
 
