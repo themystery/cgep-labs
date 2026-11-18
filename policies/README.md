@@ -8,6 +8,16 @@ The core workflow:
 
 **Requirement → Rego Policy → Evaluation → Finding → Remediation → Re-test → Evidence**
 
+## Policy Files by Cloud
+
+This folder holds two sets of policies. The GCP set came from Lab 3.3, and the AWS set (the `*_aws.rego` files) was added in Lab 3.4. Each AWS file covers the same NIST 800-53 control as its GCP counterpart and has its own package name, so both sets can be evaluated side by side.
+
+| Control | GCP (Lab 3.3) | AWS (Lab 3.4) | What it checks |
+|---|---|---|---|
+| AC-3 Access Enforcement | [ac3_no_public.rego](ac3_no_public.rego) (`compliance.ac3`) | [ac3_no_public_aws.rego](ac3_no_public_aws.rego) (`compliance.ac3_aws`) | **GCP:** GCS buckets enforce uniform bucket-level access and public access prevention, and firewall rules don't open 22/3389 to `0.0.0.0/0`. **AWS:** every S3 bucket has an `aws_s3_bucket_public_access_block` with all four flags set to `true`. |
+| CM-6 Configuration Settings | [cm6_required_tags.rego](cm6_required_tags.rego) (`compliance.cm6`) | [cm6_required_tags_aws.rego](cm6_required_tags_aws.rego) (`compliance.cm6_aws`) | **GCP:** storage buckets, compute instances and disks carry the labels `project`, `environment`, `managed_by` and `compliance_scope`. **AWS:** S3 buckets, DynamoDB tables, Lambda functions, KMS keys and CloudTrail trails carry the tags `Project`, `Environment`, `ManagedBy` and `ComplianceScope`. |
+| SC-28 Encryption at Rest | [sc28_encryption.rego](sc28_encryption.rego) (`compliance.sc28`) | [sc28_encryption_aws.rego](sc28_encryption_aws.rego) (`compliance.sc28_aws`) | **GCP:** GCS buckets use a customer-managed encryption key (CMEK). **AWS:** every S3 bucket has a matching `aws_s3_bucket_server_side_encryption_configuration`. |
+
 ## Initial Findings
 
 The initial policy evaluation identifies cloud configurations that do not meet the defined security requirements. Areas evaluated may include:
