@@ -1,7 +1,8 @@
 # policies/ac3_no_public.rego
 # METADATA
 # title: AC-3 - Access Enforcement (no public GCS or open firewall)
-# description: "GCS buckets must enforce uniform_bucket_level_access AND public_access_prevention=enforced. Firewall rules must not allow 0.0.0.0/0 on management ports (22, 3389)."
+# description: "GCS buckets must enforce uniform_bucket_level_access AND 
+# public_access_prevention=enforced. Firewall rules must not allow 0.0.0.0/0 on management ports (22, 3389)."
 # custom:
 #   control_id: AC-3
 #   framework: nist-800-53
