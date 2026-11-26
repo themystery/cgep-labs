@@ -42,13 +42,13 @@ resource "aws_s3_bucket" "primary" {
 # AES-256 keeps this lab simple. The commented block below shows how you'd
 # switch to KMS-managed keys, covered in a later lab.
 # tfsec:ignore:aws-s3-encryption-customer-key -- SC-28 met with SSE-S3 (AES256); KMS deferred to a later lab
-resource "aws_s3_bucket_server_side_encryption_configuration" "primary" {
-  bucket = aws_s3_bucket.primary.id
-  rule {
-    apply_server_side_encryption_by_default {
-      sse_algorithm = "AES256"
-    }
-  }
+#resource "aws_s3_bucket_server_side_encryption_configuration" "primary" {
+#  bucket = aws_s3_bucket.primary.id
+#  rule {
+#    apply_server_side_encryption_by_default {
+#     sse_algorithm = "AES256"
+#    }
+#  }
 
   # KMS teaser:
   # rule {
@@ -58,7 +58,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "primary" {
   #   }
   #   bucket_key_enabled = true
   # }
-}
+#}
 
 # CM-6: Versioning preserves prior object states for recovery and audit.
 resource "aws_s3_bucket_versioning" "primary" {
